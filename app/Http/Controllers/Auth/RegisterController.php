@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App;
+
+use App\Rol;
+
+
+use DB;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;

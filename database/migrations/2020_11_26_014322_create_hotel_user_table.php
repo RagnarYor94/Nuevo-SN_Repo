@@ -16,7 +16,7 @@ class CreateHotelUserTable extends Migration
         Schema::create('hotel_user', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('hotel_id');
-            $table->foreign('hotel_id')->references('id')->on('hoteles');
+            $table->foreign('hotel_id')->references('id')->on('hotels');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

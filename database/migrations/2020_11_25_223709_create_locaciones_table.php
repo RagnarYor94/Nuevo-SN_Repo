@@ -13,7 +13,7 @@ class CreateLocacionesTable extends Migration
      */
     public function up()
     {
-        Schema::create('locaciones', function (Blueprint $table) {
+        Schema::create('locacions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('localidad_nombre');
             $table->timestamps();

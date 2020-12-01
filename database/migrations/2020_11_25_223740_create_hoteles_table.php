@@ -18,7 +18,7 @@ class CreateHotelesTable extends Migration
             $table->unsignedBigInteger('cadena_id');
             $table->foreign('cadena_id')->references('id')->on('cadenas');
             $table->unsignedBigInteger('locacion_id');
-            $table->foreign('locacion_id')->references('id')->on('locaciones');
+            $table->foreign('locacion_id')->references('id')->on('locacions');
             $table->string('nombre_hotel');
             $table->timestamps();
         });

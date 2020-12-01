@@ -19,14 +19,9 @@ class HotelController extends Controller
         $locaciones = App\Locacion::paginate();
         $hotel = App\Hotel::paginate(8);
         
-        // $cadenas = DB::table('cadenas')->join('hotels','hotels.cadena_id','=','cadenas.id')
-        // ->select('cadenas.cadena_hotelera','hotels.nombre_hotel','hotels.id')
-        // ->get();
-
-
-        $query = DB::table('hoteles')->join('cadenas','cadenas.id','=','hoteles.cadena_id')
-        ->join('locaciones','locaciones.id','=','hotels.locacion_id')
-        ->select('cadenas.cadena_hotelera','hoteles.nombre_hotel','hoteles.id','locaciones.localidad_nombre')
+        $query = DB::table('hotels')->join('cadenas','cadenas.id','=','hotels.cadena_id')
+        ->join('locacions','locacions.id','=','hotels.locacion_id')
+        ->select('cadenas.cadena_hotelera','hotels.nombre_hotel','hotels.id','locacions.localidad_nombre')
         ->get();
         
         return view('catalogoHoteles.hoteles',compact('cadena','hotel','locaciones','query'));

@@ -19,7 +19,7 @@ class LocationController extends Controller
 
         if($request->nombreLocacion != ''){
             $locaciones = App\Locacion::paginate(8);
-            $nuevaLocacion = new App\Location;
+            $nuevaLocacion = new App\Locacion;
 
             $nuevaLocacion->localidad_nombre = $request->nombreLocacion;
 

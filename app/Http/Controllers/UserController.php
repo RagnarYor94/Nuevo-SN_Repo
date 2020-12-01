@@ -24,8 +24,8 @@ class UserController extends Controller
     {
         $users = User::all();
 
-        $usuario = DB::table('roles')->join('users','users.rol_id','=','roles.id')
-        ->select('roles.nombre_rol','users.id','users.name','users.primer_nombre','users.apellido','users.cumpleaños','users.email')
+        $usuario = DB::table('rols')->join('users','users.rol_id','=','rols.id')
+        ->select('rols.nombre_rol','users.id','users.name','users.primer_nombre','users.apellido','users.cumpleaños','users.email')
         ->get();
         return view('usuarios.index', compact('users', 'usuario'));
     }
@@ -51,13 +51,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nombre_rol'=>'required',
-            'name'=>'required',
-            'primer_nombre'=>'required',
-            'apellido'=>'required',
-            'cum'
-        ]);
 
         $nuevoUsuario = new App\User;
         $nuevoUsuario->rol_id = $request->nombre_rol;
@@ -70,9 +63,9 @@ class UserController extends Controller
 
         $nuevoUsuario->save();
 
-        return redirect('usuarios');
-    }
+        return redirect('usuarios')->with('mensaje','Usuario creado exitosamente!');
 
+    }
     /**
      * Display the specified resource.
      *
@@ -92,11 +85,15 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $usuarios = DB::table('rols')->join('users','users.rol_id','=','rols.id')
+        ->select('rols.nombre_rol')
+        ->get();
+
         $roles = Rol::all();
         $usuario = Rol::find($id);
         $user = App\User::findOrFail($id);
         
-        return view('usuarios.show', compact('user','usuario', 'roles'));
+        return view('usuarios.show', compact('user','usuario','usuarios', 'roles'));
     }
 
     /**
@@ -107,10 +104,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $request->validate([
-            'nombre_rol'=>'required'
-        ]);
+    {    
 
         $actualizarUsuario = App\User::findOrFail($id);
         $actualizarUsuario->rol_id = $request->nombre_rol;

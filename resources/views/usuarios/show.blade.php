@@ -9,7 +9,7 @@
         @csrf
         <label for="nombre_rol">Nuevo Rol</label>
         <select name="nombre_rol" id="nombre_rol" class="form-control">
-            <option value="selected">Escoge el Rol</option>
+            <option selected value="{{ old('nombre_rol') }}">Selecciona el nuevo rol</option>
             @foreach ($roles as $petardos)
                 <option value="{{ $petardos->id }}">{{ $petardos->nombre_rol }}</option>
             @endforeach
